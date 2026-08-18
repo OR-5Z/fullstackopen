@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Stat = ({name, value}) => <p>{name}: {value}</p>
+const Stat = ({name, value, unit=""}) => <p>{name}: {value}{unit}</p>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
@@ -9,6 +9,18 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  const all = good+bad+neutral
+
+  const average = () => {
+    if(all == 0) {
+      return "Add ratings to get an average."
+    }
+    return good-bad/all
+
+  }
+
+  const positive = good/all * 100
 
   return (
     <div>
@@ -20,6 +32,9 @@ const App = () => {
       <Stat name={'good'} value={good} />
       <Stat name={'neutral'} value={neutral} />
       <Stat name={'bad'} value={bad} />
+      <Stat name={'all'} value={all} />
+      <Stat name={'average'} value={average()} />
+      <Stat name={'positive'} value={positive} unit='%'/>
     </div>
   )
 }
