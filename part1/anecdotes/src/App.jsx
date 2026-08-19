@@ -19,13 +19,12 @@ const App = () => {
   }
    
   const [selected, setSelected] = useState(0)
-  const [votes, setVotes] = useState(
-    {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}
-  )
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
   const handleVote = () => {
-    const totalVotes = {...votes, [selected]: votes[selected]+1}
-    setVotes(totalVotes)
+    const newVotes = [...votes]
+    newVotes[selected]+=1
+    setVotes(newVotes)
   }
 
   return (
@@ -38,5 +37,4 @@ const App = () => {
     </div>
   )
 }
-
 export default App
